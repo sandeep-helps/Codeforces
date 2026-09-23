@@ -1,0 +1,210 @@
+# A. Way Too Long Words
+
+**Codeforces Problem:** 71A — Way Too Long Words
+**Difficulty:** Easy
+**Language:** C++
+
+## Problem Description
+
+Sometimes words such as `localization` or `internationalization` are very long and inconvenient to write repeatedly.
+
+A word is considered **too long** if its length is **strictly greater than 10 characters**.
+
+For every too-long word, replace it with an abbreviation:
+
+* Keep the **first character**.
+* Keep the **last character**.
+* Replace all characters between them with the **number of characters between the first and last characters**.
+
+For example:
+
+* `localization` → `l10n`
+* `internationalization` → `i18n`
+
+Words whose length is **10 or less** remain unchanged.
+
+## Input
+
+The first line contains an integer `n`:
+
+```text
+1 ≤ n ≤ 100
+```
+
+The next `n` lines contain one word each.
+
+Each word:
+
+* Contains only lowercase English letters.
+* Has a length between `1` and `100`.
+
+## Input / Output / Test Cases
+
+### Test Case 1
+
+**Input:**
+
+```text
+4
+word
+localization
+internationalization
+pneumonoultramicroscopicsilicovolcanoconiosis
+```
+
+**Output:**
+
+```text
+word
+l10n
+i18n
+p43s
+```
+
+### Test Case 2
+
+**Input:**
+
+```text
+5
+hello
+abcdefghijk
+computer
+programming
+a
+```
+
+**Output:**
+
+```text
+hello
+a9k
+computer
+p9g
+a
+```
+
+### Test Case 3
+
+**Input:**
+
+```text
+3
+abcdefghij
+abcdefghijk
+xyz
+```
+
+**Output:**
+
+```text
+abcdefghij
+a9k
+xyz
+```
+
+> Note: A word with exactly 10 characters is **not** abbreviated because only words with length **strictly greater than 10** are considered too long.
+
+## Approach
+
+For every word:
+
+1. Check its length.
+2. If the length is `≤ 10`, print the word as it is.
+3. If the length is `> 10`:
+
+   * Take the first character: `word[0]`
+   * Take the last character: `word[word.length() - 1]`
+   * Calculate the number of characters between them:
+     `word.length() - 2`
+   * Print them in the format:
+     `first + count + last`
+
+### Example
+
+For:
+
+```text
+localization
+```
+
+Length = `12`
+
+Characters between first and last:
+
+```text
+12 - 2 = 10
+```
+
+Therefore:
+
+```text
+l10n
+```
+
+## Complexity
+
+For each word, we only need to check its length and access its first and last characters.
+
+* **Time Complexity:** `O(n)` for `n` words
+* **Space Complexity:** `O(1)` extra space
+
+## Solution
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    while (n--) {
+        string word;
+        cin >> word;
+
+        if (word.length() > 10) {
+            cout << word[0]
+                 << word.length() - 2
+                 << word[word.length() - 1]
+                 << endl;
+        } else {
+            cout << word << endl;
+        }
+    }
+
+    return 0;
+}
+```
+
+## Key Concept
+
+The main condition is:
+
+```cpp
+if (word.length() > 10)
+```
+
+And the number of characters between the first and last characters is:
+
+```cpp
+word.length() - 2
+```
+
+For example:
+
+```text
+internationalization
+```
+
+has `20` characters, so:
+
+```text
+20 - 2 = 18
+```
+
+Result:
+
+```text
+i18n
+```
