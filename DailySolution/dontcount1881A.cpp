@@ -11,7 +11,7 @@ int main(){
         cin>>x>>s;
         int count = 0;
         bool found = false;       
-        for(int i = 0; i<25; i++){
+        for(int i = 0; i<7; i++){
             if(x.find(s) != string::npos){
                 found = true;
                 break;

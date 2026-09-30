@@ -11,7 +11,7 @@ int main () {
         bills += n / d;
         n %= d;
     }
-    cout<<bills<<endl;
+    cout<<bills<<endl; 
 
     return 0;
 }
